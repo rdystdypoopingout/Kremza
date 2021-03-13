@@ -1,15 +1,35 @@
 <?php
 
-require 'shishkov/QuadroEquation.php';
-require 'shishkov/MyLog.php';
+use shishkov\shishkovException;
+use shishkov\QuadroEquation;
+use shishkov\MyLog;
 
-$equation = new shishkov\QuadroEquation();
+
+include "core/EquationInterface.php";
+include 'core/LogAbstract.php';
+include 'core/LogInterface.php';
+include "shishkov/LinearEquation.php";
+include "shishkov/QuadroEquation.php";
+include "shishkov/shishkovException.php";
+include 'shishkov/MyLog.php';
+
+$equation = new QuadroEquation();
+
 try {
-    $res = $equation->solve(5, 14, 4);
+    $a = readline();
+    $b = readline();
+    $c = readline();
+
+    MyLog::log("Enter equation is: ".$a."x^2 + ".$b."x + ".$c);
+
+    $res = $equation->solve($a, $b, $c);
+    if ($res) {
+        MyLog::log("Its Quadro equation!");
+    }
     $str = implode("; ", $res);
-    shishkov\MyLog::Instance()::log($str);
-} catch (Error $error) {
-    shishkov\MyLog::Instance()::log($error->getMessage());
+    MyLog::log("Roots: ". $str);
+} catch (shishkovException $e) {
+    MyLog::log($e->getMessage());
 }
 
-shishkov\MyLog::Instance()::write();
+MyLog::write();

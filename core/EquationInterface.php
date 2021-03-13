@@ -5,7 +5,7 @@ namespace core;
 interface EquationInterface
 {
     /**
-     * @param float $a
+     * @param float $Ea
      * @param float $b
      * @param float $c
      *
