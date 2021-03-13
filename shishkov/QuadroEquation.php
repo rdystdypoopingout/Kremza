@@ -2,29 +2,35 @@
 
 namespace shishkov;
 
-class QuadroEquation extends LinearEquation
+use core\EquationInterface;
+
+require("core/EquationInterface.php");
+require("LinearEquation.php");
+
+class QuadroEquation extends LinearEquation implements EquationInterface
 {
-    protected function desc ($a, $b, $c) {
+
+    protected function Discriminant($a, $b, $c)
+    {
         return $b * $b - 4 * $a * $c;
     }
 
-    function roots ($a, $b, $c) {
-        if($a == 0){
-            return parent::func($b, $c);
+    public function solve($a, $b, $c)
+    {
+        if ($a == 0) {
+            return $this->LinearEquation($b, $c);
         }
-        $d = $this->desc($a, $b, $c);
 
-        if ($d > 0) {
-            $x = array();
-           array_push($x, (-$b - Sqrt($d))/2 * $a);
-           array_push($x, (-$b + Sqrt($d))/2 * $a);
-            return $x;
-        }
+        $d = $this->Discriminant($a, $b, $c);
+
         if ($d == 0) {
-            $x = array();
-            array_push($x, -$b / 2 * $a);
-            return $x;
+            return $this->x = ($b * (-1)) / (2 * $a);
         }
-        return null;
+
+        if ($d < 0) {
+            throw new shishkovException('doesnt exist');
+        }
+
+        return $this->x = [($b * (-1) - sqrt($d)) / (2 * $a), ($b * (-1) + sqrt($d)) / (2 * $a)];
     }
 }

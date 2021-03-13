@@ -1,16 +1,15 @@
 <?php
 
-use shishkov\LinearEquation;
-use shishkov\QuadroEquation;
+require 'shishkov/QuadroEquation.php';
+require 'shishkov/MyLog.php';
 
-include 'shishkov/LinearEquation.php';
-include 'shishkov/QuadroEquation.php';
-
-$obj = new LinearEquation();
-$obj2 = new QuadroEquation();
-$res = $obj2->roots(1, 5, 0);
-
-echo($obj->func(6, 3) . PHP_EOL);
-foreach ($res as $el) {
-    echo $el;
+$equation = new shishkov\QuadroEquation();
+try {
+    $res = $equation->solve(5, 14, 4);
+    $str = implode("; ", $res);
+    shishkov\MyLog::Instance()::log($str);
+} catch (Error $error) {
+    shishkov\MyLog::Instance()::log($error->getMessage());
 }
+
+shishkov\MyLog::Instance()::write();
