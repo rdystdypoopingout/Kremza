@@ -1,27 +1,16 @@
-﻿<?php
-class A{
-	
+<?php
+
+use shishkov\LinearEquation;
+use shishkov\QuadroEquation;
+
+include 'shishkov/LinearEquation.php';
+include 'shishkov/QuadroEquation.php';
+
+$obj = new LinearEquation();
+$obj2 = new QuadroEquation();
+$res = $obj2->roots(1, 5, 0);
+
+echo($obj->func(6, 3) . PHP_EOL);
+foreach ($res as $el) {
+    echo $el;
 }
-
-class B extends A{
-	public function __construct($a){
-		$this->a = $a;
-	}
-
-	protected $a;
-}
-
-class C extends B{
-	public function __construct($a, $b){
-		$this->b = $b;
-		parent::__construct($a);
-	}
-
-	protected $b;
-}
-
-$a1 = new A();
-$b2 = new B($a1);
-$b3 = new B($b2);
-$b4 = new B($b3);
-$c6 = new C($a1, $b4);
