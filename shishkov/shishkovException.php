@@ -1,6 +1,7 @@
 <?php
 
-namespace shishkov;
+namespace Shishkov;
 
-Class shishkovException extends \RuntimeException{
+class ShishkovException extends \RuntimeException
+{
 }

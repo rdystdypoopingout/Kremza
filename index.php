@@ -1,35 +1,35 @@
 <?php
 
-use shishkov\shishkovException;
-use shishkov\QuadroEquation;
-use shishkov\MyLog;
+require "core/EquationInterface.php";
+require "core/LogAbstract.php";
+require "core/LogInterface.php";
 
+require "Shishkov/ShishkovException.php";
+require "Shishkov/MyLog.php";
+require "Shishkov/LinearEquation.php";
+require "Shishkov/QuadroEquation.php";
 
-include "core/EquationInterface.php";
-include 'core/LogAbstract.php';
-include 'core/LogInterface.php';
-include "shishkov/LinearEquation.php";
-include "shishkov/QuadroEquation.php";
-include "shishkov/shishkovException.php";
-include 'shishkov/MyLog.php';
+use Shishkov\MyLog;
+use Shishkov\QuadroEquation;
+use Shishkov\ShishkovException;
 
-$equation = new QuadroEquation();
+MyLog::log("Program version: " . trim(file_get_contents("version")));
+
+echo "Enter 3 parameters: " . PHP_EOL;
+$a = readline("a = ");
+$b = readline("b = ");
+$c = readline("c = ");
+
+MyLog::log("The equation: " . $a . "X^2 + " . $b . "X + " . $c . " = 0" . PHP_EOL);
 
 try {
-    $a = readline();
-    $b = readline();
-    $c = readline();
-
-    MyLog::log("Enter equation is: ".$a."x^2 + ".$b."x + ".$c);
-
-    $res = $equation->solve($a, $b, $c);
-    if ($res) {
-        MyLog::log("Its Quadro equation!");
+    $Square = new QuadroEquation();
+    $res = $Square->solve($a, $b, $c);
+    foreach ($res as $el) {
+        MyLog::log($el);
     }
-    $str = implode("; ", $res);
-    MyLog::log("Roots: ". $str);
-} catch (shishkovException $e) {
-    MyLog::log($e->getMessage());
+} catch (ShishkovException $e) {
+    MyLog::log($e->getMessage() . PHP_EOL);
 }
 
 MyLog::write();

@@ -1,20 +1,16 @@
 <?php
 
-namespace shishkov;
-
-
+namespace Shishkov;
 
 class LinearEquation
 {
-	public function LinearEquation($a, $b)
-    {
-			if($a == 0)
-			{
-                throw new shishkovException("Error! Equation doesnt exist!");
-			}
-            MyLog::log("Its Linear equation!");
-			return $this->x = array(-($b/$a));
-	}
+    protected $X;
 
-	protected $x;
+    public function line($a, $b)
+    {
+        if ($a == 0) {
+            throw new ShishkovException('Не существует!');
+        }
+        return $this->X = array(- ($b / $a));
+    }
 }

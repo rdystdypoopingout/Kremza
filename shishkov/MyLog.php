@@ -1,33 +1,37 @@
 <?php
 
-namespace shishkov;
+namespace Shishkov;
 
-
-use core\LogAbstract;
 use core\LogInterface;
-
+use core\LogAbstract;
 
 class MyLog extends LogAbstract implements LogInterface
 {
 
-    public function _write(){
+    public function _write()
+    {
+        $d = new \DateTime();
+        $date = $d->format('d.m.Y_H.i.s.ms');
+        $logFileName = "log/$date.log";
 
-        foreach($this->log as $res){
-            echo $res."\n";
+        if (!file_exists("log")) {
+            mkdir("log");
         }
 
+        foreach ($this->log as $mass) {
+            echo $mass . PHP_EOL;
+        }
+
+        file_put_contents($logFileName, implode("\n", $this->log));
     }
 
-    public function _log($str){
-        $this->log[]=$str;
+    public static function log(string $str): void
+    {
+        self::Instance()->log[] = $str;
     }
 
-    public static function log($str){
-        self::Instance()->_log($str);
-	}
-
-    public static function write(){
+    public static function write(): void
+    {
         self::Instance()->_write();
     }
-
 }

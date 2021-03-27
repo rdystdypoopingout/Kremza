@@ -1,41 +1,32 @@
 <?php
 
-namespace shishkov;
+namespace Shishkov;
 
 use core\EquationInterface;
 
 class QuadroEquation extends LinearEquation implements EquationInterface
 {
-
-
-	protected function Discriminant($a, $b, $c)
+    public function solve(float $a, float $b, float $c): array
     {
-		return ($b**2)-4*$a*$c;
-    }
-	
-	public function solve($a, $b, $c)
-    {
-
-	    if($a == 0)
-	    {
-	        return $this->LinearEquation($b,$c);
-	    }
-
-        $d = $this->Discriminant($a, $b, $c);
-
-
-        if($d == 0)
-        {
-            return $this->x = array(-($b/(2*$a)));
+        if ($a == 0) {
+            return parent::line($b, $c);
         }
-		
-		if ($d < 0)
-		{
-            throw new shishkovException("Doesnt have a roots!");
-		}
-
-        return $this->x = array((-$b+sqrt($d))/(2*$a),  (-$b-sqrt($d))/(2*$a));
-		
-	}
-	
+        $D = $this->searchD($a, $b, $c);
+        if ($D > 0) {
+            $X = ((-$b) + sqrt($D)) / (2 * $a);
+            $X2 = ((-$b) - sqrt($D)) / (2 * $a);
+            return array($this->$X, $this->$X2);
+        }
+        if ($D == 0) {
+            $X = - ($b / (2 * $a));
+            return array($this->$X);
+        }
+        if ($D < 0)
+            throw new ShishkovException('Корней нет!');
+    }
+    protected function searchD($a, $b, $c)
+    {
+        $D = $b * $b - 4 * $a * $c;
+        return $D;
+    }
 }
