@@ -1,13 +1,6 @@
 <?php
 
-require "core/EquationInterface.php";
-require "core/LogAbstract.php";
-require "core/LogInterface.php";
-
-require "Shishkov/ShishkovException.php";
-require "Shishkov/MyLog.php";
-require "Shishkov/LinearEquation.php";
-require "Shishkov/QuadroEquation.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
 use Shishkov\MyLog;
 use Shishkov\QuadroEquation;

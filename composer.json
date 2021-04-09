@@ -1,0 +1,23 @@
+{
+    "name": "rdystdypoopingout/kremza",
+    "description": "nil",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ivan",
+            "email": "ivanshishkov942@gmail.com"
+        }
+    ],
+    "require": {"rdystdypoopingout/composer":  "^1.0"},
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/rdystdypoopingout/composer.git"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/rok9ru/trpo-core.git"
+        }
+    ]
+}
