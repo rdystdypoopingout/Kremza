@@ -9,7 +9,12 @@
             "email": "ivanshishkov942@gmail.com"
         }
     ],
-    "require": {"rdystdypoopingout/composer":  "^1.0"},
+    "scripts": {
+        "post-install-cmd": "git symbolic-ref —short -q HEAD > version"
+    },
+    "require": {
+        "rdystdypoopingout/composer": "^1.0"
+    },
     "repositories": [
         {
             "type": "git",
